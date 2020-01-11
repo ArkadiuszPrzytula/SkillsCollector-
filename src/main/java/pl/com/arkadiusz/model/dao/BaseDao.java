@@ -1,4 +1,4 @@
-package pl.com.arkadiusz.dao;
+package pl.com.arkadiusz.model.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

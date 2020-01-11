@@ -1,7 +1,9 @@
-package pl.com.arkadiusz.dao;
+package pl.com.arkadiusz.model.dao;
 
 import org.hibernate.SessionFactory;
 import pl.com.arkadiusz.model.User;
+
+import java.util.List;
 
 public class UserDao extends BaseDao{
     public UserDao(SessionFactory sessionFactory){
@@ -23,10 +25,24 @@ public class UserDao extends BaseDao{
     public void delete(User user){
         super.executeInTransaction(session -> session.delete(user));
     }
+
     public Boolean isUsernameAvailable(String username) {
         return super.produceInTransaction(
                 session -> session.createQuery("SELECT count(u) FROM User u WHERE u.username = :username", Long.class)
                         .setParameter("username", username)
-                        .getSingleResult() <= 0;
+                        .getSingleResult() <= 0);
+    }
+
+    public List<User>getAll() {
+        return super.produceInTransaction(session ->session.createQuery("select u from User u",User.class).getResultList());
+    }
+
+    public List<User>getAllByUserName(String userName){
+        return super.produceInTransaction(session -> session.createQuery("select u from User u WHERE u.userName=:userName",User.class).setParameter("userName", userName).getResultList());
+    }
+    public List<User> getAllUserNameAndPassword(String userName, String password){
+        return super.produceInTransaction(session -> session.createQuery("select u from User u WHERE u.userName=:userName AND u.password=:password")
+                .setParameter("userName", userName)
+                .setParameter("password",password).getResultList());
     }
 }
