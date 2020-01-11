@@ -37,7 +37,7 @@ public class Source implements Serializable {
     }
 
     @ManyToMany()
-    @JoinTable(name = "source_attached_skills", joinColumns = @JoinColumn(name = "source_id"),
+    @JoinTable(name = "sources_attached_skills", joinColumns = @JoinColumn(name = "source_id"),
     inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private Set<Skill> attachedSkills;
 
