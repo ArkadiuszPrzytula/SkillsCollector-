@@ -22,5 +22,5 @@ public class SourceDao extends BaseDao {
     public void delete(Source source){
         super.executeInTransaction(session -> session.delete(source));
     }
-    
+
 }
