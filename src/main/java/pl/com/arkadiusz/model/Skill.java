@@ -47,4 +47,13 @@ public class Skill implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "id=" + id +
+                ", attachedSource=" + attachedSource +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

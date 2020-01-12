@@ -25,6 +25,7 @@ public class BaseDao {
             result = function.apply(session);
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             log.log(Level.SEVERE, "Błąd wykonania executeInTransaction", e);
             if (transaction != null) {
                 transaction.rollback();

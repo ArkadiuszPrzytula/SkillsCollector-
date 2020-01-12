@@ -19,14 +19,14 @@ import java.util.logging.Logger;
 
 @WebListener
 public class HibernateInitializer implements ServletContextListener {
-    public static final String sFactory ="session_factory";
+    public static final String sFactory ="sFactory";
     private static final Logger logger = Logger.getGlobal();
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
             Configuration configuration = new Configuration();
             Properties hbnProperties = new Properties();
-            hbnProperties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
+            hbnProperties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
             hbnProperties.put(Environment.URL, "jdbc:mysql://localhost:3306/skills_collector?useSSL=false&serverTimezone=UTC");
             hbnProperties.put(Environment.USER, "root");
             hbnProperties.put(Environment.PASS, "Demolka777$");
@@ -49,6 +49,12 @@ public class HibernateInitializer implements ServletContextListener {
         }
 
 
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        SessionFactory sessionFactory = (SessionFactory) sce.getServletContext().getAttribute(sFactory);
+        sessionFactory.close();
     }
 }
 

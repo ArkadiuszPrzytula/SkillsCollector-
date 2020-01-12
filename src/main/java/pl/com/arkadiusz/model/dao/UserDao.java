@@ -1,6 +1,7 @@
 package pl.com.arkadiusz.model.dao;
 
 import org.hibernate.SessionFactory;
+import pl.com.arkadiusz.model.Skill;
 import pl.com.arkadiusz.model.User;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class UserDao extends BaseDao{
 
     public Boolean isUsernameAvailable(String username) {
         return super.produceInTransaction(
-                session -> session.createQuery("SELECT count(u) FROM User u WHERE u.username = :username", Long.class)
+                session -> session.createQuery("SELECT count(u) FROM User u WHERE u.userName = :username", Long.class)
                         .setParameter("username", username)
                         .getSingleResult() <= 0);
     }
@@ -44,5 +45,14 @@ public class UserDao extends BaseDao{
         return super.produceInTransaction(session -> session.createQuery("select u from User u WHERE u.userName=:userName AND u.password=:password")
                 .setParameter("userName", userName)
                 .setParameter("password",password).getResultList());
+    }
+
+    public List<Skill> userSkills(User user) {
+        return super.produceInTransaction(session -> session.createQuery("select s from User u " +
+                "join u.knownSources ks " +
+                "join ks.attachedSkills s " +
+                "where u.userName=:userName", Skill.class )
+                .setParameter("userName", user.getUserName())
+                .getResultList());
     }
 }
