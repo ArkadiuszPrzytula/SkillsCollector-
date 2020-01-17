@@ -27,6 +27,14 @@ public class Skill implements Serializable {
         this.id = id;
     }
 
+    public Set<Source> getAttachedSource() {
+        return attachedSource;
+    }
+
+    public void setAttachedSource(Set<Source> attachedSource) {
+        this.attachedSource = attachedSource;
+    }
+
     public String getName() {
         return name;
     }
@@ -50,10 +58,7 @@ public class Skill implements Serializable {
 
     @Override
     public String toString() {
-        return "Skill{" +
-                "id=" + id +
-                ", attachedSource=" + attachedSource +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
 }
+

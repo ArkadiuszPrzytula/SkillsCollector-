@@ -49,6 +49,22 @@ public class Source implements Serializable {
         this.name = name;
     }
 
+    public Set<Skill> getAttachedSkills() {
+        return attachedSkills;
+    }
+
+    public void setAttachedSkills(Set<Skill> attachedSkills) {
+        this.attachedSkills = attachedSkills;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     @ManyToMany(mappedBy = "knownSources")
     private Set<User> users;
 
@@ -63,5 +79,10 @@ public class Source implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, description, name);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

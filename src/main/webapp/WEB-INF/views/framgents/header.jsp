@@ -27,12 +27,12 @@
 </head>
 <body>
 <ul style="list-style-type: none" }>
-    <li><a href="/user/skills">Skills</a></li>
     <li><a href="/register">Register</a></li>
     <li><a href="/login">Login</a></li>
     <li><a href="/logout">Logout</a></li>
-    <li><a href="/users/sources">Sources</a></li>
-    <li><a href="/users/unknown-sources">Unknown sources</a></li>
+    <li><a href="/user/skills">Skills</a></li>
+    <li><a href="/user/sources">Sources</a></li>
+    <li><a href="/user/unknown-sources">Unknown sources</a></li>
 </ul>
 </body>
 </html>

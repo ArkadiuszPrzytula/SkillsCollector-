@@ -76,6 +76,10 @@ public class User implements Serializable {
 
     }
 
+    public Set<Source> getKnownSources() {
+        return knownSources;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -19,8 +19,9 @@ import java.util.logging.Logger;
 
 @WebListener
 public class HibernateInitializer implements ServletContextListener {
-    public static final String sFactory ="sFactory";
+    public static final String sFactory = "sFactory";
     private static final Logger logger = Logger.getGlobal();
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
@@ -31,19 +32,19 @@ public class HibernateInitializer implements ServletContextListener {
             hbnProperties.put(Environment.USER, "root");
             hbnProperties.put(Environment.PASS, "Demolka777$");
             hbnProperties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
-            hbnProperties.put(Environment.SHOW_SQL,"true");
-            hbnProperties.put(Environment.FORMAT_SQL,"true");
+            hbnProperties.put(Environment.SHOW_SQL, "true");
+            hbnProperties.put(Environment.FORMAT_SQL, "true");
             hbnProperties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
             hbnProperties.put(Environment.HBM2DDL_AUTO, "update");
             configuration.setProperties(hbnProperties);
             configuration.addAnnotatedClass(User.class);
-           configuration.addAnnotatedClass(Source.class);
-           configuration.addAnnotatedClass(Skill.class);
+            configuration.addAnnotatedClass(Source.class);
+            configuration.addAnnotatedClass(Skill.class);
 
-            ServiceRegistry serviceRegistry= new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            sce.getServletContext().setAttribute(sFactory,sessionFactory);
+            sce.getServletContext().setAttribute(sFactory, sessionFactory);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Błąd konfiguracji Hibernate!", e);
         }

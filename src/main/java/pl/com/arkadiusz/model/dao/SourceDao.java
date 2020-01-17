@@ -1,11 +1,15 @@
 package pl.com.arkadiusz.model.dao;
 
 import org.hibernate.SessionFactory;
+import pl.com.arkadiusz.model.Skill;
 import pl.com.arkadiusz.model.Source;
+import pl.com.arkadiusz.model.User;
+
+import java.util.List;
 
 public class SourceDao extends BaseDao {
 
-    protected SourceDao(SessionFactory sessionFactory) {
+    public SourceDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
@@ -21,6 +25,11 @@ public class SourceDao extends BaseDao {
 
     public void delete(Source source){
         super.executeInTransaction(session -> session.delete(source));
+    }
+
+    public List<Source> allSources(){
+        return super.produceInTransaction(session -> session.createQuery("select DISTINCT su FROM Source su " +
+                " JOIN FETCH su.attachedSkills ", Source.class).getResultList());
     }
 
 }

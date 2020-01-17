@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         if (validUser.size() == 1) {
             req.getSession().invalidate();
             req.getSession().setAttribute("user", validUser.get(0));
-            resp.sendRedirect("/users/skills");
+            resp.sendRedirect("/user/skills");
         } else {
             if (userDao.isUsernameAvailable(user.getUserName())) {
                 user.setUserName(null);
